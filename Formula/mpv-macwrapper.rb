@@ -14,17 +14,6 @@ class MpvMacwrapper < Formula
     prefix.install "mpv.app"
   end
 
-  def post_install
-    target = "#{Dir.home}/Applications"
-    system "mkdir", "-p", target
-    system "ln", "-sf", "#{prefix}/mpv.app", "#{target}/mpv.app"
-    system "killall", "Dock"
-  end
-
-  def post_uninstall
-    system "rm", "-f", "#{Dir.home}/Applications/mpv.app"
-  end
-
   def caveats
     <<~EOS
       Apple Silicon (arm64) only.  mpv must be installed separately:
@@ -32,6 +21,9 @@ class MpvMacwrapper < Formula
 
       If mpv is not found at the default paths, the app will
       prompt you to locate it on first launch.
+
+      To use, link the app to your Applications folder:
+        ln -sf #{prefix}/mpv.app ~/Applications/mpv.app
     EOS
   end
 
