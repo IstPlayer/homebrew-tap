@@ -15,13 +15,15 @@ class MpvMacwrapper < Formula
   end
 
   def post_install
-    system "rm", "-f", "/Applications/mpv.app"
-    system "ln", "-sf", "#{prefix}/mpv.app", "/Applications/mpv.app"
+    target = "#{Dir.home}/Applications"
+    system "mkdir", "-p", target
+    system "ln", "-sf", "#{prefix}/mpv.app", "#{target}/mpv.app"
     system "killall", "Dock"
   end
 
   def post_uninstall
-    system "rm", "-f", "/Applications/mpv.app"
+    target = "#{Dir.home}/Applications/mpv.app"
+    system "rm", "-f", target
   end
 
   def caveats
