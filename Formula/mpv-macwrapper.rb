@@ -14,13 +14,27 @@ class MpvMacwrapper < Formula
     prefix.install "mpv.app"
   end
 
+  def post_install
+    app_target = "/Applications/mpv.app"
+    app_source = "#{prefix}/mpv.app"
+
+    rm_rf app_target if File.symlink?(app_target) || File.exist?(app_target)
+    ln_sf app_source, app_target
+    system "killall", "Dock"
+  end
+
+  def post_uninstall
+    app_target = "/Applications/mpv.app"
+    rm_rf app_target if File.symlink?(app_target) || File.exist?(app_target)
+  end
+
   def caveats
     <<~EOS
-      To use mpv-macWrapper, copy the app to /Applications:
-        cp -R #{prefix}/mpv.app /Applications/
+      Apple Silicon (arm64) only.  mpv must be installed separately:
+        brew install mpv
 
-      Or link it:
-        ln -sf #{prefix}/mpv.app /Applications/mpv.app
+      If mpv is not found at the default paths, the app will
+      prompt you to locate it on first launch.
     EOS
   end
 
