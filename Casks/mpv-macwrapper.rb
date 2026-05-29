@@ -1,6 +1,6 @@
 cask "mpv-macwrapper" do
-  version "1.1.0"
-  sha256 "c90f80708196f7db8c79e485199edd3d4b4e867089444d932ad01b1261b59f35"
+  version "1.1.5"
+  sha256 "192b6bada7d8c6f48ede8a4307c36cbb87f9f8333c73f2cbde992889d727cc20"
 
   url "https://github.com/IstPlayer/mpv-macWrapper/releases/download/v#{version}/mpv.dmg"
   name "mpv-macWrapper"
