@@ -3,10 +3,9 @@
 ## Install
 
 ```bash
-brew tap IstPlayer/tap
-brew install mpv-macwrapper
+brew install --cask IstPlayer/tap/mpv-macwrapper
 ```
 
-## Available Formulae
+## Available Casks
 
 - [mpv-macwrapper](https://github.com/IstPlayer/mpv-macWrapper) — Wrap mpv CLI as a native macOS .app bundle
