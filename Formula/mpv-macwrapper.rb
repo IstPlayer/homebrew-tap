@@ -1,10 +1,10 @@
 class MpvMacwrapper < Formula
   desc "Wrap mpv CLI as a native macOS .app bundle"
   homepage "https://github.com/IstPlayer/mpv-macWrapper"
-  url "https://github.com/IstPlayer/mpv-macWrapper/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "de6543a4fe9eea00aa843db74875d1d7cd513f87022123ca8f4f618d2ff06e3e"
+  url "https://github.com/IstPlayer/mpv-macWrapper/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "f5982a0e2578e7470b144e9fa3c51de9cd84d1bfdf0ea0c4c254f578d9edf410"
   license "GPL-2.0-or-later"
-  version "1.0.0"
+  version "1.1.0"
 
   depends_on "mpv"
   depends_on macos: :monterey
@@ -14,18 +14,6 @@ class MpvMacwrapper < Formula
     prefix.install "mpv.app"
   end
 
-  def post_install
-    target = "#{Dir.home}/Applications"
-    system "mkdir", "-p", target
-    system "ln", "-sf", "#{prefix}/mpv.app", "#{target}/mpv.app"
-    system "killall", "Dock"
-  end
-
-  def post_uninstall
-    target = "#{Dir.home}/Applications/mpv.app"
-    system "rm", "-f", target
-  end
-
   def caveats
     <<~EOS
       Apple Silicon (arm64) only.  mpv must be installed separately:
@@ -33,6 +21,10 @@ class MpvMacwrapper < Formula
 
       If mpv is not found at the default paths, the app will
       prompt you to locate it on first launch.
+
+      To use, link or copy the app to your Applications folder:
+        ln -sf #{prefix}/mpv.app ~/Applications/mpv.app
+        cp -R #{prefix}/mpv.app /Applications/
     EOS
   end
 
