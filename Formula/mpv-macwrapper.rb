@@ -15,17 +15,16 @@ class MpvMacwrapper < Formula
   end
 
   def post_install
-    app_target = "/Applications/mpv.app"
-    app_source = "#{prefix}/mpv.app"
-
-    rm_rf app_target if File.symlink?(app_target) || File.exist?(app_target)
-    ln_sf app_source, app_target
+    app = "/Applications/mpv.app"
+    src = "#{prefix}/mpv.app"
+    File.unlink(app) if File.symlink?(app)
+    File.symlink(src, app)
     system "killall", "Dock"
   end
 
   def post_uninstall
-    app_target = "/Applications/mpv.app"
-    rm_rf app_target if File.symlink?(app_target) || File.exist?(app_target)
+    app = "/Applications/mpv.app"
+    File.unlink(app) if File.symlink?(app)
   end
 
   def caveats
