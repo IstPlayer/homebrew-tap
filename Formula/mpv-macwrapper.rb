@@ -7,7 +7,7 @@ class MpvMacwrapper < Formula
   version "1.0.0"
 
   depends_on "mpv"
-  depends_on macos: ":monterey"
+  depends_on macos: :monterey
 
   def install
     system "make"
